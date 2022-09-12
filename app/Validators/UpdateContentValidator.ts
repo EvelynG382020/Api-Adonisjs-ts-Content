@@ -3,7 +3,16 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class UpdateContentValidator {
   constructor(protected ctx: HttpContextContract) {}
-
+  public schema = schema.create({
+    title: schema.string.optional(),
+    description: schema.string.optional(),
+    year: schema.number.optional(),
+    category: schema.string.optional(),
+    rating: schema.number.optional(),
+    is_recent: schema.boolean.optional(),
+    is_trending: schema.boolean.optional(),
+    image_file: schema.file.optional(),
+  })
   /*
    * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
    *
@@ -23,7 +32,6 @@ export default class UpdateContentValidator {
    *     ])
    *    ```
    */
-  public schema = schema.create({})
 
   /**
    * Custom messages for validation failures. You can make use of dot notation `(.)`

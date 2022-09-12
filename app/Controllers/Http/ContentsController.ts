@@ -14,7 +14,7 @@ export default class ContentsController {
     const dataContent = request.body()
     const imgFile = request.file('image_file')
     dataContent.image_file = imgFile ? await ResponsiveAttachment.fromFile(imgFile) : null
-    const content = await Content.create(dataContent)
+    const content = await Content.create(payload)
     return response.json(content)
   }
 

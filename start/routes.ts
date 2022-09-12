@@ -7,6 +7,7 @@ Route.group(() => {
     Route.post('/content', 'ContentsController.store')
     Route.patch('/content/:id', 'ContentsController.update')
     Route.delete('/content/:id', 'ContentsController.destroy')
-  }).middleware('auth')
+  })
+  // middleware('auth')
   Route.post('/register', 'RegistersController.index')
 }).prefix('api')
