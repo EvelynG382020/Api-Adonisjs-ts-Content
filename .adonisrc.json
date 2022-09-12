@@ -21,7 +21,8 @@
     "./providers/AppProvider",
     "@adonisjs/core",
     "@adonisjs/lucid",
-    "adonis-responsive-attachment"
+    "adonis-responsive-attachment",
+    "@adonisjs/auth"
   ],
   "aceProviders": [
     "@adonisjs/repl"
