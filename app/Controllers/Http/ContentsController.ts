@@ -1,4 +1,3 @@
-import { Response } from '@adonisjs/core/build/standalone'
 import { ResponsiveAttachment } from '@ioc:Adonis/Addons/ResponsiveAttachment'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Content from 'App/Models/Content'
@@ -21,10 +20,16 @@ export default class ContentsController {
 
   public async edit({}: HttpContextContract) {}
 
-  public async update({ request, response, params }: HttpContextContract) {
+  public async update({ request, params }: HttpContextContract) {
     const content = await Content.findOrFail(params.id)
-    return content
+    const dataContent = request.body()
+    const imgFile = request.file('image_file')
+    content.image_file = imgFile ? await ResponsiveAttachment.fromFile(imgFile) : null
+    await content.merge(dataContent).save()
   }
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({}: HttpContextContract) {
+    // const content = await Content.first()
+    // content.image_file = null
+  }
 }
