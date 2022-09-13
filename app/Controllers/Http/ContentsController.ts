@@ -11,11 +11,13 @@ export default class ContentsController {
 
   public async store({ request, response }: HttpContextContract) {
     const payload = await request.validate(CreateContent)
-    const dataContent = request.body()
-    const imgFile = request.file('image_file')
-    dataContent.image_file = imgFile ? await ResponsiveAttachment.fromFile(imgFile) : null
-    const content = await Content.create(payload)
-    return response.json(content)
+    if (payload) {
+      const dataContent = request.body()
+      const imgFile = request.file('image_file')
+      dataContent.image_file = imgFile ? await ResponsiveAttachment.fromFile(imgFile) : null
+      const content = await Content.create(dataContent)
+      return response.json(content)
+    }
   }
 
   public async show({}: HttpContextContract) {}
